@@ -1,8 +1,13 @@
 <resources>
 	<declare-styleable name="StatusNull">
 		<attr name="icon" format="reference"/>
-		<attr name="iconColor" format="reference"/>
+		<attr name="iconColor" format="color"/>
+		<attr name="iconSize" format="dimension"/>
+		<attr name="circleColor" format="color"/>
+		<attr name="circleSize" format="dimension"/>
 		<attr name="title" format="string"/>
 		<attr name="content" format="string"/>
+		<attr name="button_text" format="string"/>
+		<attr name="button_text_color" format="color"/>
 	</declare-styleable>
 </resources>

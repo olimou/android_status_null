@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+												 xmlns:app="http://schemas.android.com/apk/res-auto"
+												 xmlns:tools="http://schemas.android.com/tools"
+												 android:layout_width="match_parent"
+												 android:layout_height="match_parent"
+												 tools:context="com.olimou.android.MainActivity">
+
+	<android.support.design.widget.AppBarLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:theme="@style/AppTheme.AppBarOverlay">
+
+		<android.support.v7.widget.Toolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="?attr/actionBarSize"
+			android:background="?attr/colorPrimary"
+			app:popupTheme="@style/AppTheme.PopupOverlay"/>
+	</android.support.design.widget.AppBarLayout>
+
+	<com.olimou.android.status_null.StatusNull
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		app:button_text="Action"
+		app:button_text_color="@color/colorAccent"
+		app:circleColor="@color/colorAccent"
+		app:circleSize="80dp"
+		app:content="Status content"
+		app:icon="@mipmap/ic_launcher"
+		app:iconSize="40dp"
+		app:title="Status Null Title"/>
+</android.support.design.widget.CoordinatorLayout>

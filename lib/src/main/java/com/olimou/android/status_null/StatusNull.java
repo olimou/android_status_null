@@ -2,7 +2,6 @@ package com.olimou.android.status_null;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.AppCompatButton;
@@ -22,6 +21,7 @@ public class StatusNull extends FrameLayout {
 	private AppCompatImageView mImgIcon;
 	private TextView           mTxtContent;
 	private TextView           mTxtTitle;
+	private TypedArray         mTypedArray;
 
 	public StatusNull(Context context) {
 		super(context);
@@ -38,51 +38,103 @@ public class StatusNull extends FrameLayout {
 		init(attrs, defStyle);
 	}
 
+	public AppCompatButton getButton() {
+		return mCompatButton;
+	}
+
 	private void init(AttributeSet _attrs, int _defStyle) {
-		View lView = inflate(getContext(), R.layout.componente_status_null, this);
+		View lView = inflate(getContext(), R.layout.component_status_null, this);
 
 		mIconBackground = findViewById(R.id.frame_background);
 		mImgIcon = (AppCompatImageView) findViewById(R.id.img_icon);
 		mTxtTitle = (TextView) findViewById(R.id.txt_title);
 		mTxtContent = (TextView) findViewById(R.id.txt_content);
 
-		TypedArray a = getContext().getTheme()
+		mTypedArray = getContext().getTheme()
 				.obtainStyledAttributes(_attrs, R.styleable.StatusNull, 0, 0);
 
-		Drawable lDrawable = a.getDrawable(R.styleable.StatusNull_iconColor);
+		int lCircleColor = mTypedArray.getColor(R.styleable.StatusNull_circleColor,
+				getContext().getResources().getColor(R.color.default_circle_color));
 
-		if (lDrawable != null) {
-			mIconBackground.setBackgroundDrawable(lDrawable);
-			mTxtTitle.setTextColor(
-					getContext().getResources().getColor(android.R.color.primary_text_light));
+		Drawable lDrawableBackground = getContext().getResources()
+				.getDrawable(R.drawable.background_circle_grey);
+
+		DrawableCompat.setTint(lDrawableBackground, lCircleColor);
+
+		mIconBackground.setBackgroundDrawable(lDrawableBackground);
+
+		float lDimension = mTypedArray.getDimension(R.styleable.StatusNull_circleSize, 0);
+
+		if (lDimension == 0) {
+			lDimension = getContext().getResources().getDimension(R.dimen.circle_background_size);
 		}
 
-		//		mImgIcon.setImageResource(lDrawable1);
+		mIconBackground.getLayoutParams().height = (int) lDimension;
+		mIconBackground.getLayoutParams().width = (int) lDimension;
 
-		mTxtTitle.setText(a.getString(R.styleable.StatusNull_title));
+		Drawable lDrawableIcon = mTypedArray.getDrawable(R.styleable.StatusNull_icon);
 
-		String lString = a.getString(R.styleable.StatusNull_content);
+		float lIconDimension = mTypedArray.getDimension(R.styleable.StatusNull_iconSize, 0);
 
-		if (!isInEditMode() && lString != null) {
-			mTxtContent.setText(Html.fromHtml(lString));
+		if (lIconDimension == 0) {
+			lIconDimension = getContext().getResources().getDimension(R.dimen.icon_size);
+		}
+
+		mImgIcon.getLayoutParams().height = (int) lIconDimension;
+		mImgIcon.getLayoutParams().width = (int) lIconDimension;
+
+		if (lDrawableIcon != null) {
+			int lColor = mTypedArray.getColor(R.styleable.StatusNull_iconColor, -1);
+
+			if (lColor != -1) {
+				DrawableCompat.setTint(lDrawableIcon, lColor);
+			}
+
+			mImgIcon.setImageDrawable(lDrawableIcon);
+		}
+
+		String lTitle = mTypedArray.getString(R.styleable.StatusNull_title);
+
+		if (lTitle != null) {
+			mTxtTitle.setText(lTitle);
+		} else {
+			mTxtTitle.setVisibility(GONE);
+		}
+
+		String lString = mTypedArray.getString(R.styleable.StatusNull_content);
+
+		if (lString != null) {
+			if (!isInEditMode()) {
+				mTxtContent.setText(Html.fromHtml(lString));
+			} else {
+				mTxtContent.setText(lString);
+			}
+		} else {
+			mTxtContent.setVisibility(GONE);
 		}
 
 		mCompatButton = (AppCompatButton) findViewById(R.id.btn);
-		mCompatButton.setVisibility(GONE);
-	}
 
-	public void setButton(String _title, OnClickListener _onClickListener) {
-		mCompatButton.setText(_title);
+		String lButtonText = mTypedArray.getString(R.styleable.StatusNull_button_text);
 
-		mCompatButton.setOnClickListener(_onClickListener);
+		if (lButtonText != null) {
+			mCompatButton.setText(lButtonText);
 
-		mCompatButton.setVisibility(VISIBLE);
+			int lColor = mTypedArray.getColor(R.styleable.StatusNull_button_text_color, -1);
+
+			if (lColor != -1) {
+				mCompatButton.setTextColor(lColor);
+			}
+		} else {
+			mCompatButton.setVisibility(GONE);
+		}
 	}
 
 	public void setIcon(int _resource) {
 		Drawable lDrawable = getContext().getResources().getDrawable(_resource);
 
-		DrawableCompat.setTint(lDrawable, Color.WHITE);
+		DrawableCompat.setTint(lDrawable, mTypedArray.getColor(R.styleable.StatusNull_iconColor,
+				getContext().getResources().getColor(android.R.color.white)));
 
 		mImgIcon.setImageDrawable(lDrawable);
 	}

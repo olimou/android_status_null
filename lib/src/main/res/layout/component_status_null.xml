@@ -15,16 +15,14 @@
 			android:id="@+id/frame_background"
 			android:layout_width="80dp"
 			android:layout_height="80dp"
-			android:layout_margin="16dp"
-			android:background="@drawable/background_circle_grey">
+			android:layout_margin="16dp">
 
 			<android.support.v7.widget.AppCompatImageView
 				android:id="@+id/img_icon"
 				android:layout_width="40dp"
 				android:layout_height="40dp"
 				android:layout_gravity="center"
-				android:scaleType="fitXY"
-				android:tint="@android:color/white"/>
+				android:scaleType="fitXY"/>
 		</FrameLayout>
 
 		<TextView
