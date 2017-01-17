@@ -32,7 +32,7 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="center"
 			android:text="Álbum vazio"
-			android:textColor="@color/text_disable_light"/>
+			android:textColor="@color/status_null_text_disable_light"/>
 
 		<TextView
 			android:id="@+id/txt_content"
@@ -44,7 +44,7 @@
 			android:maxLines="2"
 			android:text="subtitle"
 			android:textAlignment="center"
-			android:textColor="@color/text_disable_light"/>
+			android:textColor="@color/status_null_text_disable_light"/>
 
 		<android.support.v7.widget.AppCompatButton
 			android:id="@+id/btn"

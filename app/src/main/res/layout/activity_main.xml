@@ -27,7 +27,6 @@
 		app:circleColor="@color/colorAccent"
 		app:circleSize="80dp"
 		app:content="Status content"
-		app:icon="@mipmap/ic_launcher"
-		app:iconSize="46dp"
+		app:icon="@drawable/background_circle_grey"
 		app:title="Status Null Title"/>
 </android.support.design.widget.CoordinatorLayout>

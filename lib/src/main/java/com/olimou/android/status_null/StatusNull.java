@@ -54,7 +54,7 @@ public class StatusNull extends FrameLayout {
 				.obtainStyledAttributes(_attrs, R.styleable.StatusNull, 0, 0);
 
 		int lCircleColor = mTypedArray.getColor(R.styleable.StatusNull_circleColor,
-				getContext().getResources().getColor(R.color.default_circle_color));
+				getContext().getResources().getColor(R.color.status_null_default_circle_color));
 
 		Drawable lDrawableBackground = getContext().getResources()
 				.getDrawable(R.drawable.background_circle_grey);
@@ -66,7 +66,8 @@ public class StatusNull extends FrameLayout {
 		float lCircleDimension = mTypedArray.getDimension(R.styleable.StatusNull_circleSize, 0);
 
 		if (lCircleDimension == 0) {
-			lCircleDimension = getContext().getResources().getDimension(R.dimen.circle_background_size);
+			lCircleDimension = getContext().getResources()
+					.getDimension(R.dimen.status_null_circle_background_size);
 		}
 
 		mIconBackground.getLayoutParams().height = (int) lCircleDimension;
@@ -77,7 +78,8 @@ public class StatusNull extends FrameLayout {
 		float lIconDimension = mTypedArray.getDimension(R.styleable.StatusNull_iconSize, 0);
 
 		if (lIconDimension == 0) {
-			lIconDimension = getContext().getResources().getDimension(R.dimen.icon_size);
+			lIconDimension = getContext().getResources()
+					.getDimension(R.dimen.status_null_icon_size);
 		}
 
 		mImgIcon.getLayoutParams().height = (int) lIconDimension;
