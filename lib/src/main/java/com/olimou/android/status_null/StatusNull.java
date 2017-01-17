@@ -63,14 +63,14 @@ public class StatusNull extends FrameLayout {
 
 		mIconBackground.setBackgroundDrawable(lDrawableBackground);
 
-		float lDimension = mTypedArray.getDimension(R.styleable.StatusNull_circleSize, 0);
+		float lCircleDimension = mTypedArray.getDimension(R.styleable.StatusNull_circleSize, 0);
 
-		if (lDimension == 0) {
-			lDimension = getContext().getResources().getDimension(R.dimen.circle_background_size);
+		if (lCircleDimension == 0) {
+			lCircleDimension = getContext().getResources().getDimension(R.dimen.circle_background_size);
 		}
 
-		mIconBackground.getLayoutParams().height = (int) lDimension;
-		mIconBackground.getLayoutParams().width = (int) lDimension;
+		mIconBackground.getLayoutParams().height = (int) lCircleDimension;
+		mIconBackground.getLayoutParams().width = (int) lCircleDimension;
 
 		Drawable lDrawableIcon = mTypedArray.getDrawable(R.styleable.StatusNull_icon);
 
@@ -84,10 +84,10 @@ public class StatusNull extends FrameLayout {
 		mImgIcon.getLayoutParams().width = (int) lIconDimension;
 
 		if (lDrawableIcon != null) {
-			int lColor = mTypedArray.getColor(R.styleable.StatusNull_iconColor, -1);
+			int lIconColor = mTypedArray.getColor(R.styleable.StatusNull_iconColor, 0);
 
-			if (lColor != -1) {
-				DrawableCompat.setTint(lDrawableIcon, lColor);
+			if (lIconColor != 0) {
+				DrawableCompat.setTint(lDrawableIcon, lIconColor);
 			}
 
 			mImgIcon.setImageDrawable(lDrawableIcon);
@@ -101,13 +101,13 @@ public class StatusNull extends FrameLayout {
 			mTxtTitle.setVisibility(GONE);
 		}
 
-		String lString = mTypedArray.getString(R.styleable.StatusNull_content);
+		String lContent = mTypedArray.getString(R.styleable.StatusNull_content);
 
-		if (lString != null) {
+		if (lContent != null) {
 			if (!isInEditMode()) {
-				mTxtContent.setText(Html.fromHtml(lString));
+				mTxtContent.setText(Html.fromHtml(lContent));
 			} else {
-				mTxtContent.setText(lString);
+				mTxtContent.setText(lContent);
 			}
 		} else {
 			mTxtContent.setVisibility(GONE);
@@ -120,9 +120,9 @@ public class StatusNull extends FrameLayout {
 		if (lButtonText != null) {
 			mCompatButton.setText(lButtonText);
 
-			int lColor = mTypedArray.getColor(R.styleable.StatusNull_button_text_color, -1);
+			int lColor = mTypedArray.getColor(R.styleable.StatusNull_button_text_color, 0);
 
-			if (lColor != -1) {
+			if (lColor != 0) {
 				mCompatButton.setTextColor(lColor);
 			}
 		} else {

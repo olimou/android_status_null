@@ -23,11 +23,11 @@
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		app:button_text="Action"
-		app:button_text_color="@color/colorAccent"
+		app:button_text_color="@color/colorPrimary"
 		app:circleColor="@color/colorAccent"
 		app:circleSize="80dp"
 		app:content="Status content"
 		app:icon="@mipmap/ic_launcher"
-		app:iconSize="40dp"
+		app:iconSize="46dp"
 		app:title="Status Null Title"/>
 </android.support.design.widget.CoordinatorLayout>
