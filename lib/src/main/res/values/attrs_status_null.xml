@@ -1,0 +1,8 @@
+<resources>
+	<declare-styleable name="StatusNull">
+		<attr name="icon" format="reference"/>
+		<attr name="iconColor" format="reference"/>
+		<attr name="title" format="string"/>
+		<attr name="content" format="string"/>
+	</declare-styleable>
+</resources>

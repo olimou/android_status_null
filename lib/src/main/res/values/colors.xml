@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<!--Colors-->
+	<color name="text_primary_light">#e3000000</color>
+	<color name="text_secondary_light">#89000000</color>
+	<color name="text_disable_light">#61000000</color>
+</resources>

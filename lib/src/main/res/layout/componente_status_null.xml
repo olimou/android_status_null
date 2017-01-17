@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			 android:layout_width="match_parent"
+			 android:layout_height="match_parent"
+			 android:background="@android:color/white">
+
+	<LinearLayout
+		android:id="@+id/view_empty_album"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:gravity="center"
+		android:orientation="vertical">
+
+		<FrameLayout
+			android:id="@+id/frame_background"
+			android:layout_width="80dp"
+			android:layout_height="80dp"
+			android:layout_margin="16dp"
+			android:background="@drawable/background_circle_grey">
+
+			<android.support.v7.widget.AppCompatImageView
+				android:id="@+id/img_icon"
+				android:layout_width="40dp"
+				android:layout_height="40dp"
+				android:layout_gravity="center"
+				android:scaleType="fitXY"
+				android:tint="@android:color/white"/>
+		</FrameLayout>
+
+		<TextView
+			android:id="@+id/txt_title"
+			style="@style/TextAppearance.AppCompat.Title"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:text="Álbum vazio"
+			android:textColor="@color/text_disable_light"/>
+
+		<TextView
+			android:id="@+id/txt_content"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:layout_margin="16dp"
+			android:lineSpacingExtra="8sp"
+			android:maxLines="2"
+			android:text="subtitle"
+			android:textAlignment="center"
+			android:textColor="@color/text_disable_light"/>
+
+		<android.support.v7.widget.AppCompatButton
+			android:id="@+id/btn"
+			style="@style/Base.Widget.AppCompat.Button.Borderless"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_margin="8dp"
+			android:text="Button"
+			android:textColor="?attr/colorAccent"/>
+	</LinearLayout>
+</FrameLayout>
