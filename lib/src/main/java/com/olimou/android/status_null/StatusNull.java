@@ -99,6 +99,9 @@ public class StatusNull extends FrameLayout {
 
 		if (lTitle != null) {
 			mTxtTitle.setText(lTitle);
+
+			mTxtTitle.setTextColor(mTypedArray.getColor(R.styleable.StatusNull_titleColor,
+					getContext().getResources().getColor(R.color.status_null_text_disable_light)));
 		} else {
 			mTxtTitle.setVisibility(GONE);
 		}
@@ -111,6 +114,9 @@ public class StatusNull extends FrameLayout {
 			} else {
 				mTxtContent.setText(lContent);
 			}
+
+			mTxtContent.setTextColor(mTypedArray.getColor(R.styleable.StatusNull_contentColor,
+					getContext().getResources().getColor(R.color.status_null_text_disable_light)));
 		} else {
 			mTxtContent.setVisibility(GONE);
 		}
