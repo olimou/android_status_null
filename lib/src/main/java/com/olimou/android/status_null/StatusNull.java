@@ -43,7 +43,7 @@ public class StatusNull extends FrameLayout {
 	}
 
 	private void init(AttributeSet _attrs, int _defStyle) {
-		View lView = inflate(getContext(), R.layout.component_status_null, this);
+		inflate(getContext(), R.layout.component_status_null, this);
 
 		mIconBackground = findViewById(R.id.frame_background);
 		mImgIcon = (AppCompatImageView) findViewById(R.id.img_icon);
@@ -63,24 +63,17 @@ public class StatusNull extends FrameLayout {
 
 		mIconBackground.setBackgroundDrawable(lDrawableBackground);
 
-		float lCircleDimension = mTypedArray.getDimension(R.styleable.StatusNull_circleSize, 0);
-
-		if (lCircleDimension == 0) {
-			lCircleDimension = getContext().getResources()
-					.getDimension(R.dimen.status_null_circle_background_size);
-		}
+		float lCircleDimension = mTypedArray.getDimension(R.styleable.StatusNull_circleSize,
+				getContext().getResources()
+						.getDimension(R.dimen.status_null_circle_background_size));
 
 		mIconBackground.getLayoutParams().height = (int) lCircleDimension;
 		mIconBackground.getLayoutParams().width = (int) lCircleDimension;
 
 		Drawable lDrawableIcon = mTypedArray.getDrawable(R.styleable.StatusNull_icon);
 
-		float lIconDimension = mTypedArray.getDimension(R.styleable.StatusNull_iconSize, 0);
-
-		if (lIconDimension == 0) {
-			lIconDimension = getContext().getResources()
-					.getDimension(R.dimen.status_null_icon_size);
-		}
+		float lIconDimension = mTypedArray.getDimension(R.styleable.StatusNull_iconSize,
+				getContext().getResources().getDimension(R.dimen.status_null_icon_size));
 
 		mImgIcon.getLayoutParams().height = (int) lIconDimension;
 		mImgIcon.getLayoutParams().width = (int) lIconDimension;
