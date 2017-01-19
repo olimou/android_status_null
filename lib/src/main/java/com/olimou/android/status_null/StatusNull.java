@@ -3,7 +3,10 @@ package com.olimou.android.status_null;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageView;
 import android.text.Html;
@@ -56,12 +59,16 @@ public class StatusNull extends FrameLayout {
 		int lCircleColor = mTypedArray.getColor(R.styleable.StatusNull_circleColor,
 				getContext().getResources().getColor(R.color.status_null_default_circle_color));
 
-		Drawable lDrawableBackground = getContext().getResources()
-				.getDrawable(R.drawable.background_circle_grey);
+		Drawable lDrawableBackground = ContextCompat.
+				getDrawable(getContext(), R.drawable.background_circle_grey);
 
-		DrawableCompat.setTint(lDrawableBackground, lCircleColor);
+		DrawableCompat.setTint(DrawableCompat.wrap(lDrawableBackground).mutate(), lCircleColor);
 
-		mIconBackground.setBackgroundDrawable(lDrawableBackground);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+			mIconBackground.setBackground(lDrawableBackground);
+		} else {
+			mIconBackground.setBackgroundDrawable(lDrawableBackground);
+		}
 
 		float lCircleDimension = mTypedArray.getDimension(R.styleable.StatusNull_circleSize,
 				getContext().getResources()
@@ -70,23 +77,43 @@ public class StatusNull extends FrameLayout {
 		mIconBackground.getLayoutParams().height = (int) lCircleDimension;
 		mIconBackground.getLayoutParams().width = (int) lCircleDimension;
 
-		Drawable lDrawableIcon = mTypedArray.getDrawable(R.styleable.StatusNull_icon);
+		Drawable lDrawableIcon = null;
+		int lIconColor = mTypedArray.getColor(R.styleable.StatusNull_iconColor, 0);
+
+		int lResourceId = mTypedArray.getResourceId(R.styleable.StatusNull_icon, -1);
+
+		if (lResourceId != 1) {
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+				lDrawableIcon = mTypedArray.getDrawable(R.styleable.StatusNull_icon);
+
+				if (lDrawableIcon != null) {
+
+					if (lIconColor != 0) {
+						lDrawableIcon.setTint(lIconColor);
+					}
+
+					mImgIcon.setImageDrawable(lDrawableIcon);
+				}
+			} else {
+				lDrawableIcon = AppCompatResources.getDrawable(getContext(), lResourceId);
+
+				if (lDrawableIcon != null) {
+					lDrawableIcon = DrawableCompat.wrap(lDrawableIcon).mutate();
+
+					if (lIconColor != 0) {
+						DrawableCompat.setTint(lDrawableIcon, lIconColor);
+					}
+
+					mImgIcon.setImageDrawable(lDrawableIcon);
+				}
+			}
+		}
 
 		float lIconDimension = mTypedArray.getDimension(R.styleable.StatusNull_iconSize,
 				getContext().getResources().getDimension(R.dimen.status_null_icon_size));
 
 		mImgIcon.getLayoutParams().height = (int) lIconDimension;
 		mImgIcon.getLayoutParams().width = (int) lIconDimension;
-
-		if (lDrawableIcon != null) {
-			int lIconColor = mTypedArray.getColor(R.styleable.StatusNull_iconColor, 0);
-
-			if (lIconColor != 0) {
-				DrawableCompat.setTint(lDrawableIcon, lIconColor);
-			}
-
-			mImgIcon.setImageDrawable(lDrawableIcon);
-		}
 
 		String lTitle = mTypedArray.getString(R.styleable.StatusNull_title);
 
