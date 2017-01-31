@@ -28,7 +28,7 @@
 		app:button_text_color="@color/colorPrimary"
 		app:circleColor="@color/colorPrimary"
 		app:circleSize="80dp"
-		app:content="Status content djoidjdfi"
+		app:content="@string/content_bold"
 		app:icon="@drawable/ic_android_black_24dp"
 		app:iconColor="@android:color/white"
 		app:title="Status"/>

@@ -9,7 +9,7 @@ import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageView;
-import android.text.Html;
+import android.text.SpannableString;
 import android.text.Spanned;
 import android.util.AttributeSet;
 import android.view.View;
@@ -126,11 +126,12 @@ public class StatusNull extends FrameLayout {
 			mTxtTitle.setVisibility(GONE);
 		}
 
-		String lContent = mTypedArray.getString(R.styleable.StatusNull_content);
+		SpannableString lContent = new SpannableString(
+				mTypedArray.getText(R.styleable.StatusNull_content));
 
-		if (lContent != null) {
+		if (!lContent.toString().isEmpty()) {
 			if (!isInEditMode()) {
-				mTxtContent.setText(Html.fromHtml(lContent));
+				mTxtContent.setText(lContent);
 			} else {
 				mTxtContent.setText(lContent);
 			}
