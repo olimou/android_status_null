@@ -126,10 +126,11 @@ public class StatusNull extends FrameLayout {
 			mTxtTitle.setVisibility(GONE);
 		}
 
-		SpannableString lContent = new SpannableString(
-				mTypedArray.getText(R.styleable.StatusNull_content));
+		CharSequence lText = mTypedArray.getText(R.styleable.StatusNull_content);
 
-		if (!lContent.toString().isEmpty()) {
+		if (lText != null) {
+			SpannableString lContent = new SpannableString(lText);
+
 			if (!isInEditMode()) {
 				mTxtContent.setText(lContent);
 			} else {
