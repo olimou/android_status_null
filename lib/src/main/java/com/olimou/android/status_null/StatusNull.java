@@ -78,7 +78,8 @@ public class StatusNull extends FrameLayout {
 			mIconBackground.getLayoutParams().height = (int) lCircleDimension;
 			mIconBackground.getLayoutParams().width = (int) lCircleDimension;
 
-			Drawable lDrawableIcon = null;
+			Drawable lDrawableIcon;
+
 			int lIconColor = mTypedArray.getColor(R.styleable.StatusNull_iconColor, 0);
 
 			int lResourceId = mTypedArray.getResourceId(R.styleable.StatusNull_icon, -1);
@@ -166,7 +167,7 @@ public class StatusNull extends FrameLayout {
 		Drawable lDrawable = getContext().getResources().getDrawable(_resource);
 
 		DrawableCompat.setTint(lDrawable, mTypedArray.getColor(R.styleable.StatusNull_iconColor,
-				getContext().getResources().getColor(android.R.color.white)));
+				ContextCompat.getColor(getContext(), android.R.color.white)));
 
 		mImgIcon.setImageDrawable(lDrawable);
 	}
@@ -177,14 +178,17 @@ public class StatusNull extends FrameLayout {
 
 	public void setMessage(String _message) {
 		mTxtContent.setText(_message);
+		mTxtContent.setVisibility(VISIBLE);
 	}
 
 	public void setMessage(Spanned _spanned) {
 		mTxtContent.setText(_spanned);
+		mTxtContent.setVisibility(VISIBLE);
 	}
 
 	public void setTitle(String _title) {
 		mTxtTitle.setText(_title);
+		mTxtTitle.setVisibility(VISIBLE);
 	}
 
 
