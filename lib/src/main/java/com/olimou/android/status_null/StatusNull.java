@@ -60,6 +60,8 @@ public class StatusNull extends FrameLayout {
 		DrawableCompat.setTint(lDrawableBackground,
 				ContextCompat.getColor(getContext(), R.color.status_null_default_circle_color));
 
+		mCompatButton = (AppCompatButton) findViewById(R.id.btn);
+
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 			mIconBackground.setBackground(lDrawableBackground);
 		} else {
@@ -150,8 +152,6 @@ public class StatusNull extends FrameLayout {
 			} else {
 				mTxtContent.setVisibility(GONE);
 			}
-
-			mCompatButton = (AppCompatButton) findViewById(R.id.btn);
 
 			String lButtonText = lTypedArray.getString(R.styleable.StatusNull_button_text);
 
