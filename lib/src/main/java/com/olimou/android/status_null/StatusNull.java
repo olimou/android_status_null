@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.ColorRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.content.res.AppCompatResources;
@@ -24,7 +25,6 @@ public class StatusNull extends FrameLayout {
 	private AppCompatImageView mImgIcon;
 	private TextView           mTxtContent;
 	private TextView           mTxtTitle;
-	private TypedArray         mTypedArray;
 
 	public StatusNull(Context context) {
 		super(context);
@@ -54,10 +54,10 @@ public class StatusNull extends FrameLayout {
 		mTxtContent = (TextView) findViewById(R.id.txt_content);
 
 		if (_attrs != null) {
-			mTypedArray = getContext().getTheme()
+			TypedArray lTypedArray = getContext().getTheme()
 					.obtainStyledAttributes(_attrs, R.styleable.StatusNull, 0, 0);
 
-			int lCircleColor = mTypedArray.getColor(R.styleable.StatusNull_circleColor,
+			int lCircleColor = lTypedArray.getColor(R.styleable.StatusNull_circleColor,
 					getContext().getResources().getColor(R.color.status_null_default_circle_color));
 
 			Drawable lDrawableBackground = ContextCompat.
@@ -71,7 +71,7 @@ public class StatusNull extends FrameLayout {
 				mIconBackground.setBackgroundDrawable(lDrawableBackground);
 			}
 
-			float lCircleDimension = mTypedArray.getDimension(R.styleable.StatusNull_circleSize,
+			float lCircleDimension = lTypedArray.getDimension(R.styleable.StatusNull_circleSize,
 					getContext().getResources()
 							.getDimension(R.dimen.status_null_circle_background_size));
 
@@ -80,13 +80,13 @@ public class StatusNull extends FrameLayout {
 
 			Drawable lDrawableIcon;
 
-			int lIconColor = mTypedArray.getColor(R.styleable.StatusNull_iconColor, 0);
+			int lIconColor = lTypedArray.getColor(R.styleable.StatusNull_iconColor, 0);
 
-			int lResourceId = mTypedArray.getResourceId(R.styleable.StatusNull_icon, -1);
+			int lResourceId = lTypedArray.getResourceId(R.styleable.StatusNull_icon, -1);
 
 			if (lResourceId != 1) {
 				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-					lDrawableIcon = mTypedArray.getDrawable(R.styleable.StatusNull_icon);
+					lDrawableIcon = lTypedArray.getDrawable(R.styleable.StatusNull_icon);
 
 					if (lDrawableIcon != null) {
 
@@ -111,25 +111,25 @@ public class StatusNull extends FrameLayout {
 				}
 			}
 
-			float lIconDimension = mTypedArray.getDimension(R.styleable.StatusNull_iconSize,
+			float lIconDimension = lTypedArray.getDimension(R.styleable.StatusNull_iconSize,
 					getContext().getResources().getDimension(R.dimen.status_null_icon_size));
 
 			mImgIcon.getLayoutParams().height = (int) lIconDimension;
 			mImgIcon.getLayoutParams().width = (int) lIconDimension;
 
-			String lTitle = mTypedArray.getString(R.styleable.StatusNull_title);
+			String lTitle = lTypedArray.getString(R.styleable.StatusNull_title);
 
 			if (lTitle != null) {
 				mTxtTitle.setText(lTitle);
 
-				mTxtTitle.setTextColor(mTypedArray.getColor(R.styleable.StatusNull_titleColor,
-						getContext().getResources()
-								.getColor(R.color.status_null_text_disable_light)));
+				mTxtTitle.setTextColor(lTypedArray.getColor(R.styleable.StatusNull_titleColor,
+						ContextCompat
+								.getColor(getContext(), R.color.status_null_text_disable_light)));
 			} else {
 				mTxtTitle.setVisibility(GONE);
 			}
 
-			CharSequence lText = mTypedArray.getText(R.styleable.StatusNull_content);
+			CharSequence lText = lTypedArray.getText(R.styleable.StatusNull_content);
 
 			if (lText != null) {
 				SpannableString lContent = new SpannableString(lText);
@@ -140,21 +140,21 @@ public class StatusNull extends FrameLayout {
 					mTxtContent.setText(lContent);
 				}
 
-				mTxtContent.setTextColor(mTypedArray.getColor(R.styleable.StatusNull_contentColor,
-						getContext().getResources()
-								.getColor(R.color.status_null_text_disable_light)));
+				mTxtContent.setTextColor(lTypedArray.getColor(R.styleable.StatusNull_contentColor,
+						ContextCompat
+								.getColor(getContext(), R.color.status_null_text_disable_light)));
 			} else {
 				mTxtContent.setVisibility(GONE);
 			}
 
 			mCompatButton = (AppCompatButton) findViewById(R.id.btn);
 
-			String lButtonText = mTypedArray.getString(R.styleable.StatusNull_button_text);
+			String lButtonText = lTypedArray.getString(R.styleable.StatusNull_button_text);
 
 			if (lButtonText != null) {
 				mCompatButton.setText(lButtonText);
 
-				int lColor = mTypedArray.getColor(R.styleable.StatusNull_button_text_color, 0);
+				int lColor = lTypedArray.getColor(R.styleable.StatusNull_button_text_color, 0);
 
 				if (lColor != 0) {
 					mCompatButton.setTextColor(lColor);
@@ -165,17 +165,21 @@ public class StatusNull extends FrameLayout {
 		}
 	}
 
-	public void setIcon(int _resource) {
-		Drawable lDrawable = getContext().getResources().getDrawable(_resource);
+	public void setCircleColor(Drawable _color) {
+		mIconBackground.setBackgroundDrawable(_color);
+	}
 
-		DrawableCompat.setTint(lDrawable, mTypedArray.getColor(R.styleable.StatusNull_iconColor,
-				ContextCompat.getColor(getContext(), android.R.color.white)));
+	public void setIcon(int _resource) {
+		Drawable lDrawable = ContextCompat.getDrawable(getContext(), _resource);
 
 		mImgIcon.setImageDrawable(lDrawable);
 	}
 
-	public void setIconColor(Drawable _color) {
-		mIconBackground.setBackgroundDrawable(_color);
+	public void setIconColor(@ColorRes int _color) {
+		Drawable lDrawable = mImgIcon.getDrawable();
+
+		DrawableCompat.setTint(lDrawable, ContextCompat.getColor(getContext(), _color));
+
 	}
 
 	public void setMessage(String _message) {
