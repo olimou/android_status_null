@@ -53,58 +53,60 @@ public class StatusNull extends FrameLayout {
 		mTxtTitle = (TextView) findViewById(R.id.txt_title);
 		mTxtContent = (TextView) findViewById(R.id.txt_content);
 
-		mTypedArray = getContext().getTheme()
-				.obtainStyledAttributes(_attrs, R.styleable.StatusNull, 0, 0);
+		if (_attrs != null) {
+			mTypedArray = getContext().getTheme()
+					.obtainStyledAttributes(_attrs, R.styleable.StatusNull, 0, 0);
 
-		int lCircleColor = mTypedArray.getColor(R.styleable.StatusNull_circleColor,
-				getContext().getResources().getColor(R.color.status_null_default_circle_color));
+			int lCircleColor = mTypedArray.getColor(R.styleable.StatusNull_circleColor,
+					getContext().getResources().getColor(R.color.status_null_default_circle_color));
 
-		Drawable lDrawableBackground = ContextCompat.
-				getDrawable(getContext(), R.drawable.background_circle_grey);
+			Drawable lDrawableBackground = ContextCompat.
+					getDrawable(getContext(), R.drawable.background_circle_grey);
 
-		DrawableCompat.setTint(DrawableCompat.wrap(lDrawableBackground).mutate(), lCircleColor);
+			DrawableCompat.setTint(DrawableCompat.wrap(lDrawableBackground).mutate(), lCircleColor);
 
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-			mIconBackground.setBackground(lDrawableBackground);
-		} else {
-			mIconBackground.setBackgroundDrawable(lDrawableBackground);
-		}
-
-		float lCircleDimension = mTypedArray.getDimension(R.styleable.StatusNull_circleSize,
-				getContext().getResources()
-						.getDimension(R.dimen.status_null_circle_background_size));
-
-		mIconBackground.getLayoutParams().height = (int) lCircleDimension;
-		mIconBackground.getLayoutParams().width = (int) lCircleDimension;
-
-		Drawable lDrawableIcon = null;
-		int lIconColor = mTypedArray.getColor(R.styleable.StatusNull_iconColor, 0);
-
-		int lResourceId = mTypedArray.getResourceId(R.styleable.StatusNull_icon, -1);
-
-		if (lResourceId != 1) {
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-				lDrawableIcon = mTypedArray.getDrawable(R.styleable.StatusNull_icon);
-
-				if (lDrawableIcon != null) {
-
-					if (lIconColor != 0) {
-						lDrawableIcon.setTint(lIconColor);
-					}
-
-					mImgIcon.setImageDrawable(lDrawableIcon);
-				}
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+				mIconBackground.setBackground(lDrawableBackground);
 			} else {
-				lDrawableIcon = AppCompatResources.getDrawable(getContext(), lResourceId);
+				mIconBackground.setBackgroundDrawable(lDrawableBackground);
+			}
 
-				if (lDrawableIcon != null) {
-					lDrawableIcon = DrawableCompat.wrap(lDrawableIcon).mutate();
+			float lCircleDimension = mTypedArray.getDimension(R.styleable.StatusNull_circleSize,
+					getContext().getResources()
+							.getDimension(R.dimen.status_null_circle_background_size));
 
-					if (lIconColor != 0) {
-						DrawableCompat.setTint(lDrawableIcon, lIconColor);
+			mIconBackground.getLayoutParams().height = (int) lCircleDimension;
+			mIconBackground.getLayoutParams().width = (int) lCircleDimension;
+
+			Drawable lDrawableIcon = null;
+			int lIconColor = mTypedArray.getColor(R.styleable.StatusNull_iconColor, 0);
+
+			int lResourceId = mTypedArray.getResourceId(R.styleable.StatusNull_icon, -1);
+
+			if (lResourceId != 1) {
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+					lDrawableIcon = mTypedArray.getDrawable(R.styleable.StatusNull_icon);
+
+					if (lDrawableIcon != null) {
+
+						if (lIconColor != 0) {
+							lDrawableIcon.setTint(lIconColor);
+						}
+
+						mImgIcon.setImageDrawable(lDrawableIcon);
 					}
+				} else {
+					lDrawableIcon = AppCompatResources.getDrawable(getContext(), lResourceId);
 
-					mImgIcon.setImageDrawable(lDrawableIcon);
+					if (lDrawableIcon != null) {
+						lDrawableIcon = DrawableCompat.wrap(lDrawableIcon).mutate();
+
+						if (lIconColor != 0) {
+							DrawableCompat.setTint(lDrawableIcon, lIconColor);
+						}
+
+						mImgIcon.setImageDrawable(lDrawableIcon);
+					}
 				}
 			}
 		}
