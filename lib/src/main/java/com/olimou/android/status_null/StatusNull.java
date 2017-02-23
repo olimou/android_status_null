@@ -110,56 +110,58 @@ public class StatusNull extends FrameLayout {
 					}
 				}
 			}
-		}
 
-		float lIconDimension = mTypedArray.getDimension(R.styleable.StatusNull_iconSize,
-				getContext().getResources().getDimension(R.dimen.status_null_icon_size));
+			float lIconDimension = mTypedArray.getDimension(R.styleable.StatusNull_iconSize,
+					getContext().getResources().getDimension(R.dimen.status_null_icon_size));
 
-		mImgIcon.getLayoutParams().height = (int) lIconDimension;
-		mImgIcon.getLayoutParams().width = (int) lIconDimension;
+			mImgIcon.getLayoutParams().height = (int) lIconDimension;
+			mImgIcon.getLayoutParams().width = (int) lIconDimension;
 
-		String lTitle = mTypedArray.getString(R.styleable.StatusNull_title);
+			String lTitle = mTypedArray.getString(R.styleable.StatusNull_title);
 
-		if (lTitle != null) {
-			mTxtTitle.setText(lTitle);
+			if (lTitle != null) {
+				mTxtTitle.setText(lTitle);
 
-			mTxtTitle.setTextColor(mTypedArray.getColor(R.styleable.StatusNull_titleColor,
-					getContext().getResources().getColor(R.color.status_null_text_disable_light)));
-		} else {
-			mTxtTitle.setVisibility(GONE);
-		}
-
-		CharSequence lText = mTypedArray.getText(R.styleable.StatusNull_content);
-
-		if (lText != null) {
-			SpannableString lContent = new SpannableString(lText);
-
-			if (!isInEditMode()) {
-				mTxtContent.setText(lContent);
+				mTxtTitle.setTextColor(mTypedArray.getColor(R.styleable.StatusNull_titleColor,
+						getContext().getResources()
+								.getColor(R.color.status_null_text_disable_light)));
 			} else {
-				mTxtContent.setText(lContent);
+				mTxtTitle.setVisibility(GONE);
 			}
 
-			mTxtContent.setTextColor(mTypedArray.getColor(R.styleable.StatusNull_contentColor,
-					getContext().getResources().getColor(R.color.status_null_text_disable_light)));
-		} else {
-			mTxtContent.setVisibility(GONE);
-		}
+			CharSequence lText = mTypedArray.getText(R.styleable.StatusNull_content);
 
-		mCompatButton = (AppCompatButton) findViewById(R.id.btn);
+			if (lText != null) {
+				SpannableString lContent = new SpannableString(lText);
 
-		String lButtonText = mTypedArray.getString(R.styleable.StatusNull_button_text);
+				if (!isInEditMode()) {
+					mTxtContent.setText(lContent);
+				} else {
+					mTxtContent.setText(lContent);
+				}
 
-		if (lButtonText != null) {
-			mCompatButton.setText(lButtonText);
-
-			int lColor = mTypedArray.getColor(R.styleable.StatusNull_button_text_color, 0);
-
-			if (lColor != 0) {
-				mCompatButton.setTextColor(lColor);
+				mTxtContent.setTextColor(mTypedArray.getColor(R.styleable.StatusNull_contentColor,
+						getContext().getResources()
+								.getColor(R.color.status_null_text_disable_light)));
+			} else {
+				mTxtContent.setVisibility(GONE);
 			}
-		} else {
-			mCompatButton.setVisibility(GONE);
+
+			mCompatButton = (AppCompatButton) findViewById(R.id.btn);
+
+			String lButtonText = mTypedArray.getString(R.styleable.StatusNull_button_text);
+
+			if (lButtonText != null) {
+				mCompatButton.setText(lButtonText);
+
+				int lColor = mTypedArray.getColor(R.styleable.StatusNull_button_text_color, 0);
+
+				if (lColor != 0) {
+					mCompatButton.setTextColor(lColor);
+				}
+			} else {
+				mCompatButton.setVisibility(GONE);
+			}
 		}
 	}
 
