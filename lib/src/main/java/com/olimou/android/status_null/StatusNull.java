@@ -53,23 +53,26 @@ public class StatusNull extends FrameLayout {
 		mTxtTitle = (TextView) findViewById(R.id.txt_title);
 		mTxtContent = (TextView) findViewById(R.id.txt_content);
 
+		Drawable lDrawableBackground = ContextCompat.
+				getDrawable(getContext(), R.drawable.background_circle_grey);
+
+		DrawableCompat.setTint(lDrawableBackground,
+				ContextCompat.getColor(getContext(), R.color.status_null_default_circle_color));
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+			mIconBackground.setBackground(lDrawableBackground);
+		} else {
+			mIconBackground.setBackgroundDrawable(lDrawableBackground);
+		}
+
 		if (_attrs != null) {
 			TypedArray lTypedArray = getContext().getTheme()
 					.obtainStyledAttributes(_attrs, R.styleable.StatusNull, 0, 0);
 
 			int lCircleColor = lTypedArray.getColor(R.styleable.StatusNull_circleColor,
-					getContext().getResources().getColor(R.color.status_null_default_circle_color));
-
-			Drawable lDrawableBackground = ContextCompat.
-					getDrawable(getContext(), R.drawable.background_circle_grey);
+					ContextCompat.getColor(getContext(), R.color.status_null_default_circle_color));
 
 			DrawableCompat.setTint(DrawableCompat.wrap(lDrawableBackground).mutate(), lCircleColor);
-
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-				mIconBackground.setBackground(lDrawableBackground);
-			} else {
-				mIconBackground.setBackgroundDrawable(lDrawableBackground);
-			}
 
 			float lCircleDimension = lTypedArray.getDimension(R.styleable.StatusNull_circleSize,
 					getContext().getResources()
@@ -165,8 +168,10 @@ public class StatusNull extends FrameLayout {
 		}
 	}
 
-	public void setCircleColor(Drawable _color) {
-		mIconBackground.setBackgroundDrawable(_color);
+	public void setCircleColor(@ColorRes int _color) {
+		Drawable lBackground = mIconBackground.getBackground();
+
+		DrawableCompat.setTint(lBackground, ContextCompat.getColor(getContext(), _color));
 	}
 
 	public void setIcon(int _resource) {

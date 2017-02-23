@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
 
 		StatusNull lStatusNull = (StatusNull) findViewById(R.id.status_null);
 
+		lStatusNull.setCircleColor(R.color.colorPrimary);
+
 		lStatusNull.getButton().setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
