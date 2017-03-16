@@ -41,7 +41,6 @@
 			android:layout_gravity="center"
 			android:layout_margin="16dp"
 			android:lineSpacingExtra="8sp"
-			android:maxLines="2"
 			android:text="subtitle"
 			android:textAlignment="center"
 			android:textColor="@color/status_null_text_disable_light"/>
