@@ -38,4 +38,4 @@ Arquivo .xml
             app:title="Título"/>
 ```
 
-
+![alt text](https://github.com/olimou/android_status_null/blob/master/device-2017-10-11-100048.png)
