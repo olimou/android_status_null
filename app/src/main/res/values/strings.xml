@@ -1,5 +1,8 @@
 <resources>
-	<string name="app_name">Olimou Lib</string>
-	<string name="title_activity_main">MainActivity</string>
-	<string name="content_bold">Status <b>content</b></string>
+    <string name="app_name">Android Status Null</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="content_bold">Status <b>content</b></string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

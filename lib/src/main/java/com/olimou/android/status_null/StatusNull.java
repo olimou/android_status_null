@@ -11,8 +11,8 @@ import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.content.res.AppCompatResources;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageView;
+import android.text.Html;
 import android.text.SpannableString;
-import android.text.Spanned;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -20,188 +20,203 @@ import android.widget.TextView;
 
 public class StatusNull extends FrameLayout {
 
-	public static final String TAG = StatusNull.class.getSimpleName();
-	private AppCompatButton    mCompatButton;
-	private View               mIconBackground;
-	private AppCompatImageView mImgIcon;
-	private TextView           mTxtContent;
-	private TextView           mTxtTitle;
+    public static final String TAG = StatusNull.class.getSimpleName();
+    private int mButtonTextColor;
+    private AppCompatButton mCompatButton;
+    private View mIconBackground;
+    private AppCompatImageView mImgIcon;
+    private int mMessageColor;
+    private int mTitleColor;
+    private TextView mTxtContent;
+    private TextView mTxtTitle;
 
-	public StatusNull(Context context) {
-		super(context);
-		init(null, 0);
-	}
+    public StatusNull(Context context) {
+        super(context);
+        init(null, 0);
+    }
 
-	public StatusNull(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		init(attrs, 0);
-	}
+    public StatusNull(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init(attrs, 0);
+    }
 
-	public StatusNull(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
-		init(attrs, defStyle);
-	}
+    public StatusNull(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+        init(attrs, defStyle);
+    }
 
-	public AppCompatButton getButton() {
-		return mCompatButton;
-	}
+    public AppCompatButton getButton() {
+        return mCompatButton;
+    }
 
-	private void init(AttributeSet _attrs, int _defStyle) {
-		inflate(getContext(), R.layout.component_status_null, this);
+    private void init(AttributeSet _attrs, int _defStyle) {
+        inflate(getContext(), R.layout.component_status_null, this);
 
-		mIconBackground = findViewById(R.id.frame_background);
-		mImgIcon = (AppCompatImageView) findViewById(R.id.img_icon);
-		mTxtTitle = (TextView) findViewById(R.id.txt_title);
-		mTxtContent = (TextView) findViewById(R.id.txt_content);
+        mIconBackground = findViewById(R.id.frame_background);
+        mImgIcon = findViewById(R.id.img_icon);
+        mTxtTitle = findViewById(R.id.txt_title);
+        mTxtContent = findViewById(R.id.txt_content);
 
-		Drawable lDrawableBackground = ContextCompat.
-				getDrawable(getContext(), R.drawable.background_circle_grey);
+        Drawable lDrawableBackground = ContextCompat.
+                getDrawable(getContext(), R.drawable.background_circle_grey);
 
-		DrawableCompat.setTint(lDrawableBackground,
-				ContextCompat.getColor(getContext(), R.color.status_null_default_circle_color));
+        DrawableCompat.setTint(lDrawableBackground, ContextCompat.getColor(getContext(), R.color.status_null_default_circle_color));
 
-		mCompatButton = (AppCompatButton) findViewById(R.id.btn);
+        mCompatButton = findViewById(R.id.btn);
 
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-			mIconBackground.setBackground(lDrawableBackground);
-		} else {
-			mIconBackground.setBackgroundDrawable(lDrawableBackground);
-		}
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            mIconBackground.setBackground(lDrawableBackground);
+        } else {
+            mIconBackground.setBackgroundDrawable(lDrawableBackground);
+        }
 
-		if (_attrs != null) {
-			TypedArray lTypedArray = getContext().getTheme()
-					.obtainStyledAttributes(_attrs, R.styleable.StatusNull, 0, 0);
+        if (_attrs != null) {
+            TypedArray lTypedArray = getContext().getTheme().obtainStyledAttributes(_attrs, R.styleable.StatusNull, 0, 0);
 
-			int lCircleColor = lTypedArray.getColor(R.styleable.StatusNull_circleColor,
-					ContextCompat.getColor(getContext(), R.color.status_null_default_circle_color));
+            int lCircleColor = lTypedArray.getColor(R.styleable.StatusNull_circleColor, ContextCompat.getColor(getContext(), R.color.status_null_default_circle_color));
 
-			DrawableCompat.setTint(DrawableCompat.wrap(lDrawableBackground).mutate(), lCircleColor);
+            DrawableCompat.setTint(DrawableCompat.wrap(lDrawableBackground).mutate(), lCircleColor);
 
-			float lCircleDimension = lTypedArray.getDimension(R.styleable.StatusNull_circleSize,
-					getContext().getResources()
-							.getDimension(R.dimen.status_null_circle_background_size));
+            float lCircleDimension = lTypedArray.getDimension(R.styleable.StatusNull_circleSize, getContext().getResources().getDimension(R.dimen.status_null_circle_background_size));
 
-			mIconBackground.getLayoutParams().height = (int) lCircleDimension;
-			mIconBackground.getLayoutParams().width = (int) lCircleDimension;
+            mIconBackground.getLayoutParams().height = (int) lCircleDimension;
+            mIconBackground.getLayoutParams().width = (int) lCircleDimension;
 
-			Drawable lDrawableIcon;
+            Drawable lDrawableIcon;
 
-			int lIconColor = lTypedArray.getColor(R.styleable.StatusNull_iconColor, 0);
+            int lIconColor = lTypedArray.getColor(R.styleable.StatusNull_iconColor, 0);
 
-			int lResourceId = lTypedArray.getResourceId(R.styleable.StatusNull_icon, -1);
+            int lIconRes = lTypedArray.getResourceId(R.styleable.StatusNull_icon, -1);
 
-			if (lResourceId != 1) {
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-					lDrawableIcon = lTypedArray.getDrawable(R.styleable.StatusNull_icon);
+            if (lIconRes != 1) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    lDrawableIcon = lTypedArray.getDrawable(R.styleable.StatusNull_icon);
 
-					if (lDrawableIcon != null) {
+                    if (lDrawableIcon != null) {
 
-						if (lIconColor != 0) {
-							lDrawableIcon.setTint(lIconColor);
-						}
+                        if (lIconColor != 0) {
+                            lDrawableIcon.setTint(lIconColor);
+                        }
 
-						mImgIcon.setImageDrawable(lDrawableIcon);
-					}
-				} else {
-					lDrawableIcon = AppCompatResources.getDrawable(getContext(), lResourceId);
+                        mImgIcon.setImageDrawable(lDrawableIcon);
+                    }
+                } else {
+                    lDrawableIcon = AppCompatResources.getDrawable(getContext(), lIconRes);
 
-					if (lDrawableIcon != null) {
-						lDrawableIcon = DrawableCompat.wrap(lDrawableIcon).mutate();
+                    if (lDrawableIcon != null) {
+                        lDrawableIcon = DrawableCompat.wrap(lDrawableIcon).mutate();
 
-						if (lIconColor != 0) {
-							DrawableCompat.setTint(lDrawableIcon, lIconColor);
-						}
+                        if (lIconColor != 0) {
+                            DrawableCompat.setTint(lDrawableIcon, lIconColor);
+                        }
 
-						mImgIcon.setImageDrawable(lDrawableIcon);
-					}
-				}
-			}
+                        mImgIcon.setImageDrawable(lDrawableIcon);
+                    }
+                }
+            }
 
-			float lIconDimension = lTypedArray.getDimension(R.styleable.StatusNull_iconSize,
-					getContext().getResources().getDimension(R.dimen.status_null_icon_size));
+            float lIconDimension = lTypedArray.getDimension(R.styleable.StatusNull_iconSize, getContext().getResources().getDimension(R.dimen.status_null_icon_size));
 
-			mImgIcon.getLayoutParams().height = (int) lIconDimension;
-			mImgIcon.getLayoutParams().width = (int) lIconDimension;
+            mImgIcon.getLayoutParams().height = (int) lIconDimension;
+            mImgIcon.getLayoutParams().width = (int) lIconDimension;
 
-			String lTitle = lTypedArray.getString(R.styleable.StatusNull_title);
+            mTitleColor = lTypedArray.getColor(R.styleable.StatusNull_titleColor, ContextCompat.getColor(getContext(), R.color.status_null_text_disable_light));
 
-			if (lTitle != null) {
-				mTxtTitle.setText(lTitle);
+            String lTitleText = lTypedArray.getString(R.styleable.StatusNull_title);
 
-				mTxtTitle.setTextColor(lTypedArray.getColor(R.styleable.StatusNull_titleColor,
-						ContextCompat
-								.getColor(getContext(), R.color.status_null_text_disable_light)));
-			} else {
-				mTxtTitle.setVisibility(GONE);
-			}
+            setTitle(lTitleText);
 
-			CharSequence lText = lTypedArray.getText(R.styleable.StatusNull_content);
+            mMessageColor = lTypedArray.getColor(R.styleable.StatusNull_contentColor, ContextCompat.getColor(getContext(), R.color.status_null_text_disable_light));
 
-			if (lText != null) {
-				SpannableString lContent = new SpannableString(lText);
+            CharSequence lMessageText = lTypedArray.getText(R.styleable.StatusNull_content);
 
-				if (!isInEditMode()) {
-					mTxtContent.setText(lContent);
-				} else {
-					mTxtContent.setText(lContent);
-				}
+            setContent(lMessageText);
 
-				mTxtContent.setTextColor(lTypedArray.getColor(R.styleable.StatusNull_contentColor,
-						ContextCompat
-								.getColor(getContext(), R.color.status_null_text_disable_light)));
-			} else {
-				mTxtContent.setVisibility(GONE);
-			}
+            mButtonTextColor = lTypedArray.getColor(R.styleable.StatusNull_button_text_color, 0);
 
-			String lButtonText = lTypedArray.getString(R.styleable.StatusNull_button_text);
+            String lButtonText = lTypedArray.getString(R.styleable.StatusNull_button_text);
 
-			if (lButtonText != null) {
-				mCompatButton.setText(lButtonText);
+            setButtonText(lButtonText);
+        }
+    }
 
-				int lColor = lTypedArray.getColor(R.styleable.StatusNull_button_text_color, 0);
+    public void setButtonText(String buttonText) {
+        if (buttonText != null) {
 
-				if (lColor != 0) {
-					mCompatButton.setTextColor(lColor);
-				}
-			} else {
-				mCompatButton.setVisibility(GONE);
-			}
-		}
-	}
+            if (!isInEditMode()) {
+                mCompatButton.setText(Html.fromHtml(buttonText));
+            }else{
+                mCompatButton.setText(buttonText);
+            }
 
-	public void setCircleColor(@ColorRes int _color) {
-		Drawable lBackground = mIconBackground.getBackground();
+            if (mButtonTextColor != 0) {
+                mCompatButton.setTextColor(mButtonTextColor);
+            }
+            mCompatButton.setVisibility(VISIBLE);
+        } else {
+            mCompatButton.setVisibility(GONE);
+        }
+    }
 
-		DrawableCompat.setTint(lBackground, ContextCompat.getColor(getContext(), _color));
-	}
+    public void setCircleColor(@ColorRes int _color) {
+        Drawable lBackground = mIconBackground.getBackground();
 
-	public void setIcon(@DrawableRes int _resource) {
-		Drawable lDrawable = ContextCompat.getDrawable(getContext(), _resource);
+        DrawableCompat.setTint(lBackground, ContextCompat.getColor(getContext(), _color));
+    }
 
-		mImgIcon.setImageDrawable(lDrawable);
-	}
+    private void setContent(CharSequence messageText) {
+        if (messageText != null) {
+            setContent(messageText.toString());
+        } else {
+            setContent(null);
+        }
+    }
 
-	public void setIconColor(@ColorRes int _color) {
-		Drawable lDrawable = mImgIcon.getDrawable();
+    public void setContent(String _message) {
+        if (_message != null) {
+            SpannableString lContent = new SpannableString(_message);
 
-		DrawableCompat.setTint(lDrawable, ContextCompat.getColor(getContext(), _color));
+            if (!isInEditMode()) {
+                mTxtContent.setText(Html.fromHtml(_message));
+            } else {
+                mTxtContent.setText(lContent);
+            }
 
-	}
+            mTxtContent.setTextColor(mMessageColor);
 
-	public void setMessage(String _message) {
-		mTxtContent.setText(_message);
-		mTxtContent.setVisibility(VISIBLE);
-	}
+            mTxtContent.setVisibility(VISIBLE);
+        } else {
+            mTxtContent.setVisibility(GONE);
+        }
+    }
 
-	public void setMessage(Spanned _spanned) {
-		mTxtContent.setText(_spanned);
-		mTxtContent.setVisibility(VISIBLE);
-	}
+    public void setIcon(@DrawableRes int _resource) {
+        Drawable lDrawable = ContextCompat.getDrawable(getContext(), _resource);
 
-	public void setTitle(String _title) {
-		mTxtTitle.setText(_title);
-		mTxtTitle.setVisibility(VISIBLE);
-	}
+        mImgIcon.setImageDrawable(lDrawable);
+    }
 
+    public void setIconColor(@ColorRes int _color) {
+        Drawable lDrawable = mImgIcon.getDrawable();
 
+        DrawableCompat.setTint(lDrawable, ContextCompat.getColor(getContext(), _color));
+
+    }
+
+    public void setTitle(String _title) {
+        if (_title != null) {
+
+            if(!isInEditMode()){
+                mTxtTitle.setText(Html.fromHtml(_title));
+            }else{
+                mTxtTitle.setText(_title);
+            }
+
+            mTxtTitle.setTextColor(mTitleColor);
+
+            mTxtTitle.setVisibility(VISIBLE);
+        } else {
+            mTxtTitle.setVisibility(GONE);
+        }
+    }
 }

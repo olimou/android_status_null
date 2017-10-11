@@ -1,0 +1,62 @@
+<layout>
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.olimou.android.content.ContentModel"/>
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:app="http://schemas.android.com/apk/res-auto"
+                  xmlns:tools="http://schemas.android.com/tools"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical"
+                  tools:context="com.olimou.android.content.ContentFragment">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            tools:visibility="gone">
+
+            <android.support.v7.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="@{model::titleToggle}"
+                android:text="Title"/>
+
+            <android.support.v7.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="@{model::contentToggle}"
+                android:text="Content"/>
+
+            <android.support.v7.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="@{model::buttonToggle}"
+                android:text="Button"/>
+        </LinearLayout>
+
+        <com.olimou.android.status_null.StatusNull
+            android:id="@+id/status_null"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:button_text="@{model.button, default=Action}"
+            app:button_text_color="@color/colorPrimary"
+            app:circleColor="@color/colorPrimary"
+            app:circleSize="80dp"
+            app:content="@{model.content, default=Content}"
+            app:icon="@drawable/ic_android_black_24dp"
+            app:iconColor="@android:color/white"
+            app:title="@{model.title, default=Title}"/>
+
+    </LinearLayout>
+
+</layout>
