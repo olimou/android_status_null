@@ -73,24 +73,24 @@ public class StatusNull extends FrameLayout {
         if (_attrs != null) {
             TypedArray lTypedArray = getContext().getTheme().obtainStyledAttributes(_attrs, R.styleable.StatusNull, 0, 0);
 
-            int lCircleColor = lTypedArray.getColor(R.styleable.StatusNull_circleColor, ContextCompat.getColor(getContext(), R.color.status_null_default_circle_color));
+            int lCircleColor = lTypedArray.getColor(R.styleable.StatusNull_SN_circle_color, ContextCompat.getColor(getContext(), R.color.status_null_default_circle_color));
 
             DrawableCompat.setTint(DrawableCompat.wrap(lDrawableBackground).mutate(), lCircleColor);
 
-            float lCircleDimension = lTypedArray.getDimension(R.styleable.StatusNull_circleSize, getContext().getResources().getDimension(R.dimen.status_null_circle_background_size));
+            float lCircleDimension = lTypedArray.getDimension(R.styleable.StatusNull_SN_circle_size, getContext().getResources().getDimension(R.dimen.status_null_circle_background_size));
 
             mIconBackground.getLayoutParams().height = (int) lCircleDimension;
             mIconBackground.getLayoutParams().width = (int) lCircleDimension;
 
             Drawable lDrawableIcon;
 
-            int lIconColor = lTypedArray.getColor(R.styleable.StatusNull_iconColor, 0);
+            int lIconColor = lTypedArray.getColor(R.styleable.StatusNull_SN_icon_color, 0);
 
-            int lIconRes = lTypedArray.getResourceId(R.styleable.StatusNull_icon, -1);
+            int lIconRes = lTypedArray.getResourceId(R.styleable.StatusNull_SN_icon, -1);
 
             if (lIconRes != 1) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    lDrawableIcon = lTypedArray.getDrawable(R.styleable.StatusNull_icon);
+                    lDrawableIcon = lTypedArray.getDrawable(R.styleable.StatusNull_SN_icon);
 
                     if (lDrawableIcon != null) {
 
@@ -115,26 +115,26 @@ public class StatusNull extends FrameLayout {
                 }
             }
 
-            float lIconDimension = lTypedArray.getDimension(R.styleable.StatusNull_iconSize, getContext().getResources().getDimension(R.dimen.status_null_icon_size));
+            float lIconDimension = lTypedArray.getDimension(R.styleable.StatusNull_SN_icon_size, getContext().getResources().getDimension(R.dimen.status_null_icon_size));
 
             mImgIcon.getLayoutParams().height = (int) lIconDimension;
             mImgIcon.getLayoutParams().width = (int) lIconDimension;
 
-            mTitleColor = lTypedArray.getColor(R.styleable.StatusNull_titleColor, ContextCompat.getColor(getContext(), R.color.status_null_text_disable_light));
+            mTitleColor = lTypedArray.getColor(R.styleable.StatusNull_SN_title_color, ContextCompat.getColor(getContext(), R.color.status_null_text_disable_light));
 
-            String lTitleText = lTypedArray.getString(R.styleable.StatusNull_title);
+            String lTitleText = lTypedArray.getString(R.styleable.StatusNull_SN_title);
 
             setTitle(lTitleText);
 
-            mMessageColor = lTypedArray.getColor(R.styleable.StatusNull_contentColor, ContextCompat.getColor(getContext(), R.color.status_null_text_disable_light));
+            mMessageColor = lTypedArray.getColor(R.styleable.StatusNull_SN_content_color, ContextCompat.getColor(getContext(), R.color.status_null_text_disable_light));
 
-            CharSequence lMessageText = lTypedArray.getText(R.styleable.StatusNull_content);
+            CharSequence lMessageText = lTypedArray.getText(R.styleable.StatusNull_SN_content);
 
             setContent(lMessageText);
 
-            mButtonTextColor = lTypedArray.getColor(R.styleable.StatusNull_button_text_color, 0);
+            mButtonTextColor = lTypedArray.getColor(R.styleable.StatusNull_SN_button_text_color, 0);
 
-            String lButtonText = lTypedArray.getString(R.styleable.StatusNull_button_text);
+            String lButtonText = lTypedArray.getString(R.styleable.StatusNull_SN_button_text);
 
             setButtonText(lButtonText);
         }

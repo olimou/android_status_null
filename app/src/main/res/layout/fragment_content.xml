@@ -48,14 +48,14 @@
             android:id="@+id/status_null"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:button_text="@{model.button, default=Action}"
-            app:button_text_color="@color/colorPrimary"
-            app:circleColor="@color/colorPrimary"
-            app:circleSize="80dp"
-            app:content="@{model.content, default=Content}"
-            app:icon="@drawable/ic_android_black_24dp"
-            app:iconColor="@android:color/white"
-            app:title="@{model.title, default=Title}"/>
+            app:SN_button_text="@{model.button, default=Action}"
+            app:SN_button_text_color="@color/colorPrimary"
+            app:SN_circle_color="@color/colorPrimary"
+            app:SN_circle_size="80dp"
+            app:SN_content="@{model.content, default=Content}"
+            app:SN_icon="@drawable/ic_android_black_24dp"
+            app:SN_icon_color="@android:color/white"
+            app:SN_title="@{model.title, default=Title}"/>
 
     </LinearLayout>
 

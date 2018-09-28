@@ -1,15 +1,15 @@
 <resources>
     <declare-styleable name="StatusNull">
-        <attr name="icon" format="reference"/>
-        <attr name="iconColor" format="color"/>
-        <attr name="iconSize" format="dimension"/>
-        <attr name="circleColor" format="color"/>
-        <attr name="circleSize" format="dimension"/>
-        <attr name="title" format="string"/>
-        <attr name="titleColor" format="color"/>
-        <attr name="content" format="string"/>
-        <attr name="contentColor" format="color"/>
-        <attr name="button_text" format="string"/>
-        <attr name="button_text_color" format="color"/>
+        <attr name="SN_icon" format="reference"/>
+        <attr name="SN_icon_color" format="color"/>
+        <attr name="SN_icon_size" format="dimension"/>
+        <attr name="SN_circle_color" format="color"/>
+        <attr name="SN_circle_size" format="dimension"/>
+        <attr name="SN_title" format="string"/>
+        <attr name="SN_title_color" format="color"/>
+        <attr name="SN_content" format="string"/>
+        <attr name="SN_content_color" format="color"/>
+        <attr name="SN_button_text" format="string"/>
+        <attr name="SN_button_text_color" format="color"/>
     </declare-styleable>
 </resources>
